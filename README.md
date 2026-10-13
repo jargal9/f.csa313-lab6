@@ -1,9 +1,6 @@
-# Лаборатори №6 — Category-Partition ба PICT
+# F.CSA313 — Лаборатори №6: Тест тохиолдол боловсруулах — Category-Partition ба PICT
 
-**Оюутны нэр:** [Өөрийн нэр]
-**Оюутны код:** [Өөрийн код]
-**Хичээл:** F.CSA313 — Программ хангамжийн чанарын баталгаа ба тест
-
+> **B232270019 О. Оюунжаргал**
 ## Хэсэг A. Category-Partition
 
 ### A1. Сонголт ба төлөөлөх утгууд
@@ -61,3 +58,22 @@ From = Missing үед Amount = Normal гэж хязгаарлахад 12 ком�
 **Бүрэн олонлог → хязгаарлалтын дараах олонлог: 72 → 50.**
 
 Энэ тооцоо нь хоёр IF хязгаарлалтыг хэрэглэхэд үлдэх хүчинтэй комбинацын тоо юм. PICT-ийн pairwise гаралтын мөрийн тоо нь үүнээс өөр үзүүлэлт байна.
+
+### A3. Спецификацийн хүснэгт
+
+| № | From | To | Amount | Currency | Хүлээгдэх үр дүн |
+|---:|---|---|---|---|---|
+| 1 | Valid | Valid | Normal | Same | `201 {"result":"OK"}` |
+| 2 | Missing | Valid | Normal | Same | `200 {"result":"ERROR_NO_FROM"}` |
+| 3 | Frozen | Valid | Normal | Same | `200 {"result":"ERROR_FROZEN"}` |
+| 4 | Valid | Missing | Normal | Same | `200 {"result":"ERROR_NO_TO"}` |
+| 5 | Valid | SameAsFrom | Normal | Same | `200 {"result":"ERROR_SAME_ACCOUNT"}` |
+| 6 | Valid | Valid | Zero | Same | `200 {"result":"ERROR_BAD_AMOUNT"}` |
+| 7 | Valid | Valid | OverBalance | Same | `200 {"result":"ERROR_INSUFFICIENT"}` |
+| 8 | Valid | Valid | OverLimit | Same | `200 {"result":"ERROR_LIMIT"}` |
+| 9 | Valid | Valid | Normal | Different | `201 {"result":"OK"}` |
+| 10 | Missing | Missing | Normal | Same | `200 {"result":"ERROR_NO_FROM"}` |
+| 11 | Frozen | Valid | OverBalance | Different | `200 {"result":"ERROR_FROZEN"}` |
+| 12 | Valid | SameAsFrom | Zero | Different | `200 {"result":"ERROR_SAME_ACCOUNT"}` |
+
+Давхар нөхцөлийн үр дүнг сонгосон давуу эрэмбээр тодорхойлов. Хүлээгдэх үр дүн нь бодит хэрэгжилтээс баталгаажаагүй, спецификацид тулгуурласан тестийн таамаглал юм.
